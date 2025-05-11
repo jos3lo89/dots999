@@ -95,3 +95,26 @@ nano ~/.config/starship.toml
 echo 'eval "$(starship init zsh)"' >> ~/.zshrc
 source ~/.zshrc
 ```
+### zellij
+```bash
+# instalar
+brew install zellij
+# layouts
+cp -r ~/jos3lo/dots999/zellij/layouts ~/.config/zellij/
+# plugins
+cp -r ~/jos3lo/dots999/zellij/plugins ~/.config/zellij
+# eliminar configuracion por defecto
+rm ~/.config/zellij/config.kdl
+# copear nueva configuración
+cp ~/jos3lo/dots999/zellij/config.kdl ~/.config/zellij
+```
+### neovim 
+- neovim
+```bash
+brew install neovim
+```
+- config
+```bash
+cp nvim ~/.config/
+```
+La carpeta `nvim` es neovim configurado desde cero con lazy
