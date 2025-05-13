@@ -12,6 +12,8 @@ wsl --install -d <DistroName>
 ```
 ### primeras instalaciones
 ```bash
+sudo apt-get update
+sudo apt-get upgrade
 sudo apt install git curl neofetch build-essential wget unzip zip tar -y
 ```
 ### zsh
