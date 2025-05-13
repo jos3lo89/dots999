@@ -111,6 +111,8 @@ cp -r ~/jos3lo/dots999/zellij/plugins ~/.config/zellij
 rm ~/.config/zellij/config.kdl
 # copear nueva configuración
 cp ~/jos3lo/dots999/zellij/config.kdl ~/.config/zellij
+# hacer predeterminado zellij
+echo 'eval "$(zellij setup --generate-auto-start zsh)"' >> ~/.zshrc
 ```
 ### neovim 
 - neovim
