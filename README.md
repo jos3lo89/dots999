@@ -63,6 +63,8 @@ c++ --version
 # zoxide
 brew install zoxide
 echo 'eval "$(zoxide init zsh)"' >> ~/.zshrc
+# bat
+brew  install bat
 # lazygit
 brew install lazygit
 echo 'alias lg="lazygit"' >> ~/.zshrc
