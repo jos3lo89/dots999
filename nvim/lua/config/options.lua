@@ -36,10 +36,15 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Salir del modo termin
 -- vim.keymap.set('n', '<up>', '<cmd>echo "¡Usa k para moverte!!"<CR>')
 -- vim.keymap.set('n', '<down>', '<cmd>echo "¡Usa j para moverte!!"<CR>')
 
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Mover el foco a la ventana izquierda" })
-vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Mover el foco a la ventana derecha" })
-vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Mover el foco a la ventana inferior" })
-vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Mover el foco a la ventana superior" })
+-- vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Mover el foco a la ventana izquierda" })
+vim.keymap.set("n", "<leader>h", "<C-w><C-h>", { desc = "Mover el foco a la ventana izquierda" })
+vim.keymap.set("n", "<leader>l", "<C-w><C-l>", { desc = "Mover el foco a la ventana derecha" })
+vim.keymap.set("n", "<leader>j", "<C-w><C-j>", { desc = "Mover el foco a la ventana inferior" })
+vim.keymap.set("n", "<leader>k", "<C-w><C-k>", { desc = "Mover el foco a la ventana superior" })
+vim.keymap.set("n", "<leader>q", ":q<CR>", { desc = "Salir del archivo" })
+vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Guardar el archivo" })
+vim.keymap.set("n", "<leader>v", ":vsplit<CR>", { desc = "Abrir split vertical" })
+vim.keymap.set("n", "<leader>s", ":split<CR>", { desc = "Abrir split horizontal" })
 
 -- NOTA: Algunos terminales tienen atajos que colisionan o no pueden enviar códigos de tecla distintos
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Mover ventana a la izquierda" })

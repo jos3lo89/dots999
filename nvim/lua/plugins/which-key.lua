@@ -1,50 +1,31 @@
-return { -- Muestra los atajos de teclado disponibles
-	"folke/which-key.nvim",
-	event = "VimEnter", -- Se carga al entrar a Vim
-	opts = {
-		delay = 300,
-		icons = {
-			-- set icon mappings to true if you have a Nerd Font
-			mappings = vim.g.have_nerd_font,
-			-- If you are using a Nerd Font: set icons.keys to an empty table which will use the
-			-- default which-key.nvim defined Nerd Font icons, otherwise define a string table
-			keys = vim.g.have_nerd_font and {} or {
-				Up = "<Up> ",
-				Down = "<Down> ",
-				Left = "<Left> ",
-				Right = "<Right> ",
-				C = "<C-…> ",
-				M = "<M-…> ",
-				D = "<D-…> ",
-				S = "<S-…> ",
-				CR = "<CR> ",
-				Esc = "<Esc> ",
-				ScrollWheelDown = "<ScrollWheelDown> ",
-				ScrollWheelUp = "<ScrollWheelUp> ",
-				NL = "<NL> ",
-				BS = "<BS> ",
-				Space = "<Space> ",
-				Tab = "<Tab> ",
-				F1 = "<F1>",
-				F2 = "<F2>",
-				F3 = "<F3>",
-				F4 = "<F4>",
-				F5 = "<F5>",
-				F6 = "<F6>",
-				F7 = "<F7>",
-				F8 = "<F8>",
-				F9 = "<F9>",
-				F10 = "<F10>",
-				F11 = "<F11>",
-				F12 = "<F12>",
-			},
-		},
+-- This file contains the configuration for the which-key.nvim plugin in Neovim.
 
-		-- Document existing key chains
-		spec = {
-			{ "<leader>t", group = "[T]oggle" },
-			{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
-			{ "<leader>f", group = "Find" },
+return {
+	-- Plugin: which-key.nvim
+	-- URL: https://github.com/folke/which-key.nvim
+	-- Description: A Neovim plugin that displays a popup with possible keybindings of the command you started typing.
+	"folke/which-key.nvim",
+
+	event = "VeryLazy", -- Load this plugin on the 'VeryLazy' event
+
+	init = function()
+		-- Set the timeout for key sequences
+		vim.o.timeout = true
+		vim.o.timeoutlen = 300 -- Set the timeout length to 300 milliseconds
+	end,
+
+	keys = {
+		{
+			-- Keybinding to show which-key popup
+			"<leader>?",
+			function()
+				require("which-key").show({ global = false }) -- Show the which-key popup for local keybindings
+			end,
+		},
+		{
+			-- Define a group for Obsidian-related commands
+			"<leader>o",
+			group = "Obsidian",
 		},
 	},
 }

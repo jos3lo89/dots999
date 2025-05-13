@@ -1,57 +1,42 @@
 return {
-
-	{ -- Linting
+	{ -- Linting (verificación de estilo y errores en el código)
 		"mfussenegger/nvim-lint",
+
+		-- Cargar el plugin cuando se abre un archivo existente o se crea uno nuevo
 		event = { "BufReadPre", "BufNewFile" },
+
+		-- Función de configuración principal
 		config = function()
 			local lint = require("lint")
+
+			-- Asignamos linters según el tipo de archivo (filetype)
 			lint.linters_by_ft = {
-				markdown = { "markdownlint" },
-				typescript = { "eslint" },
-				typescriptreact = { "eslint" },
+				markdown = { "markdownlint" }, -- Para archivos Markdown
+				typescript = { "eslint" }, -- Para TypeScript
+				typescriptreact = { "eslint" }, -- Para React con TypeScript
 			}
 
-			-- To allow other plugins to add linters to require('lint').linters_by_ft,
-			-- instead set linters_by_ft like this:
+			-- NOTA: Si otros plugins también quieren añadir linters,
+			-- podrías usar esta forma más segura:
+			--
 			-- lint.linters_by_ft = lint.linters_by_ft or {}
 			-- lint.linters_by_ft['markdown'] = { 'markdownlint' }
+
+			-- ⚠️ Advertencia: El plugin tiene linters predeterminados para varios tipos de archivo.
+			-- Estos linters se activan a menos que los desactives explícitamente.
+			-- Ejemplo:
 			--
-			-- However, note that this will enable a set of default linters,
-			-- which will cause errors unless these tools are available:
-			-- {
-			--   clojure = { "clj-kondo" },
-			--   dockerfile = { "hadolint" },
-			--   inko = { "inko" },
-			--   janet = { "janet" },
-			--   json = { "jsonlint" },
-			--   markdown = { "vale" },
-			--   rst = { "vale" },
-			--   ruby = { "ruby" },
-			--   terraform = { "tflint" },
-			--   text = { "vale" }
-			-- }
-			--
-			-- You can disable the default linters by setting their filetypes to nil:
 			-- lint.linters_by_ft['clojure'] = nil
 			-- lint.linters_by_ft['dockerfile'] = nil
-			-- lint.linters_by_ft['inko'] = nil
-			-- lint.linters_by_ft['janet'] = nil
-			-- lint.linters_by_ft['json'] = nil
-			-- lint.linters_by_ft['markdown'] = nil
-			-- lint.linters_by_ft['rst'] = nil
-			-- lint.linters_by_ft['ruby'] = nil
-			-- lint.linters_by_ft['terraform'] = nil
-			-- lint.linters_by_ft['text'] = nil
 
-			-- Create autocommand which carries out the actual linting
-			-- on the specified events.
+			-- Creamos un grupo de autocomandos para ejecutar el linter automáticamente
 			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+
+			-- Configuramos cuándo debe ejecutarse el linter:
 			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 				group = lint_augroup,
 				callback = function()
-					-- Only run the linter in buffers that you can modify in order to
-					-- avoid superfluous noise, notably within the handy LSP pop-ups that
-					-- describe the hovered symbol using Markdown.
+					-- Solo ejecutar el linter en archivos modificables
 					if vim.opt_local.modifiable:get() then
 						lint.try_lint()
 					end
